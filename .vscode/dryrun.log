@@ -1,0 +1,5 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make: Entering directory 'c:/Users/danie/Desktop/GO/GraphQL/hackernews'
+go run github.com/99designs/gqlgen generate
+make: Leaving directory 'c:/Users/danie/Desktop/GO/GraphQL/hackernews'
+ 
