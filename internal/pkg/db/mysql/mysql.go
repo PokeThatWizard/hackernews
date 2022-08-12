@@ -11,7 +11,7 @@ import (
 var Db *sql.DB
 
 func InitDB() {
-	db, err := sql.Open("mysql", "root:dbpass@tcp(localhost)/hackernews")
+	db, err := sql.Open("mysql", "root:dbpass@(localhost)/hackernews")
 	if err != nil {
 		log.Panic(err)
 	}
@@ -19,7 +19,6 @@ func InitDB() {
 	if err = db.Ping(); err != nil {
 		log.Panic(err)
 	}
-
 	Db = db
 }
 
@@ -31,14 +30,12 @@ func Migrate() {
 	if err := Db.Ping(); err != nil {
 		log.Fatal(err)
 	}
-
 	driver, _ := mysql.WithInstance(Db, &mysql.Config{})
 	m, _ := migrate.NewWithDatabaseInstance(
 		"file://internal/pkg/db/migrations/mysql",
 		"mysql",
 		driver,
 	)
-
 	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
 		log.Fatal(err)
 	}
