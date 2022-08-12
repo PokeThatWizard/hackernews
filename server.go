@@ -7,6 +7,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/PokeThatWizard/hackernews/auth"
 	"github.com/PokeThatWizard/hackernews/graph"
 	"github.com/PokeThatWizard/hackernews/graph/generated"
 	database "github.com/PokeThatWizard/hackernews/internal/pkg/db/mysql"
@@ -22,6 +23,8 @@ func main() {
 	}
 
 	router := chi.NewRouter()
+
+	router.Use(auth.Middleware())
 
 	database.InitDB()
 	defer database.CloseDB()
